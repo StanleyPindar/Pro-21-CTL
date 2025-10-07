@@ -218,10 +218,21 @@ const MetaTags = React.memo<MetaTagsProps>(({
     return [...new Set([...defaultKeywords, ...keywords])].join(', ');
   }, [keywords]);
   
-  const currentUrl = React.useMemo(() => 
-    canonicalUrl || (typeof window !== 'undefined' ? window.location.href : ''),
-    [canonicalUrl]
-  );
+  const currentUrl = React.useMemo(() => {
+    // Always use the provided canonicalUrl - never fall back to window.location.href
+    // This prevents indexing issues with duplicate content
+    if (canonicalUrl) {
+      return canonicalUrl;
+    }
+    
+    // If no canonical URL provided, construct it from the current path
+    if (typeof window !== 'undefined') {
+      const path = window.location.pathname;
+      return `https://comparetheleaf.co.uk${path}`;
+    }
+    
+    return 'https://comparetheleaf.co.uk';
+  }, [canonicalUrl]);
   
   const socialImage = React.useMemo(() => 
     image || 'https://comparetheleaf.co.uk/images/CTL_Logo_384 (1).webp',

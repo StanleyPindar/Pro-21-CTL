@@ -4,5 +4,9 @@
 /clinic/ /clinics/ 301
 /clinic /clinics 301
 
+# Fix URL mismatches for indexing issues
+/conditions/epilepsy /conditions/epilepsy-article 301
+/reviews/mamedica-review-article /reviews/mamedica-review 301
+
 # SPA fallback - must be last
 /* /index.html 200

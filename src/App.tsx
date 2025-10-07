@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { ClinicDataProvider } from './context/ClinicDataProvider';
 import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -665,6 +665,10 @@ function App() {
                 <Route path="/clinic/:slug" element={<ClinicRedirect />} /> 
                 <Route path="/clinic/" element={<ClinicRedirect />} />
                 <Route path="/clinic" element={<ClinicRedirect />} />
+                
+                {/* Fix URL mismatches for indexing */}
+                <Route path="/conditions/epilepsy" element={<Navigate to="/conditions/epilepsy-article" replace />} />
+                <Route path="/reviews/mamedica-review-article" element={<Navigate to="/reviews/mamedica-review" replace />} />
                 
                 {/* 404 Catch-all Route */}
                 <Route path="*" element={

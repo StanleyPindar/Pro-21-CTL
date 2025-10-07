@@ -119,7 +119,7 @@ const HowToGetAClinicPage: React.FC = () => {
       <MetaTags 
         title="How to Get Started with a Medical Cannabis Clinic UK - Step-by-Step Guide"
         description="Complete guide to getting started with a medical cannabis clinic in the UK. Step-by-step process from booking to receiving your prescription."
-        canonicalUrl="https://comparetheleaf.co.uk/how-to-get-a-clinic"
+        canonicalUrl="https://comparetheleaf.co.uk/education/how-to-get-a-clinic"
         keywords={['how to get medical cannabis clinic', 'medical cannabis process UK', 'clinic booking guide', 'medical cannabis steps']}
       />
       
