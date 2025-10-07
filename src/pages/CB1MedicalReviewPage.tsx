@@ -88,7 +88,7 @@ const CB1MedicalReviewPage: React.FC = () => {
             bestRating: 5,
             worstRating: 1
           }}
-          canonicalUrl={`https://comparetheleaf.co.uk/reviews/${slug}`}
+          canonicalUrl="https://comparetheleaf.co.uk/reviews/cb1-medical-review"
         />
       )}
 

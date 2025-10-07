@@ -106,7 +106,7 @@ const CantourageReviewPage: React.FC = () => {
             bestRating: 5,
             worstRating: 1
           }}
-          canonicalUrl={`https://comparetheleaf.co.uk/reviews/${slug}`}
+          canonicalUrl="https://comparetheleaf.co.uk/reviews/cantourage-review"
         />
       )}
 

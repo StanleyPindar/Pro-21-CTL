@@ -272,6 +272,15 @@ function App() {
                     <Footer />
                   </RouteErrorBoundary>
                 } />
+                <Route path="/reviews/birmingham-cannabis-clinic-review" element={
+                  <RouteErrorBoundary>
+                    <Navigation />
+                    <main role="main">
+                      <BirminghamCannabisCareReviewPage />
+                    </main>
+                    <Footer />
+                  </RouteErrorBoundary>
+                } />
                 
                 <Route path="/budget-tool" element={
                   <RouteErrorBoundary>
