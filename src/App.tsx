@@ -50,6 +50,13 @@ const PrivacyPolicyPage = lazy(() => import('./pages/PrivacyPolicyPage'));
 const CookiePolicyPage = lazy(() => import('./pages/CookiePolicyPage'));
 const TermsOfUsePage = lazy(() => import('./pages/TermsOfUsePage'));
 const MedicalDisclaimerPage = lazy(() => import('./pages/MedicalDisclaimerPage'));
+
+// New legal pages
+const TermsPage = lazy(() => import('./pages/TermsPage'));
+const PrivacyPage = lazy(() => import('./pages/PrivacyPage'));
+const CookiesPage = lazy(() => import('./pages/CookiesPage'));
+const FAQPage = lazy(() => import('./pages/FAQPage'));
+const BlogPage = lazy(() => import('./pages/BlogPage'));
 const ClinicDirectoryPage = lazy(() => import('./pages/ClinicDirectoryPage'));
 
 const HowToGetPrescriptionPage = lazy(() => import('./pages/HowToGetPrescriptionPage'));
@@ -60,6 +67,7 @@ const MarketInsightsPage = lazy(() => import('./pages/MarketInsightsPage'));
 
 // Condition articles
 const ChronicPainArticle = lazy(() => import('./pages/conditions/ChronicPainArticle'));
+const ChronicPainConditionPage = lazy(() => import('./pages/conditions/ChronicPainConditionPage'));
 const AnxietyArticle = lazy(() => import('./pages/conditions/AnxietyArticle'));
 const InsomniaArticle = lazy(() => import('./pages/conditions/InsomniaArticle'));
 const MultipleSclerosisArticle = lazy(() => import('./pages/conditions/MultipleSclerosisArticle'));
@@ -466,7 +474,7 @@ function App() {
                   <RouteErrorBoundary>
                     <Navigation />
                     <main role="main">
-                      <PrivacyPolicyPage />
+                      <PrivacyPage />
                     </main>
                     <Footer />
                   </RouteErrorBoundary>
@@ -475,7 +483,7 @@ function App() {
                   <RouteErrorBoundary>
                     <Navigation />
                     <main role="main">
-                      <CookiePolicyPage />
+                      <CookiesPage />
                     </main>
                     <Footer />
                   </RouteErrorBoundary>
@@ -484,7 +492,16 @@ function App() {
                   <RouteErrorBoundary>
                     <Navigation />
                     <main role="main">
-                      <TermsOfUsePage />
+                      <TermsPage />
+                    </main>
+                    <Footer />
+                  </RouteErrorBoundary>
+                } />
+                <Route path="/faq" element={
+                  <RouteErrorBoundary>
+                    <Navigation />
+                    <main role="main">
+                      <FAQPage />
                     </main>
                     <Footer />
                   </RouteErrorBoundary>
@@ -653,7 +670,81 @@ function App() {
                   </RouteErrorBoundary>
                 } />
 
-                {/* Admin Routes - Public Access */}
+                        {/* New Legal and Core Pages */}
+                <Route path="/blog" element={
+                  <RouteErrorBoundary>
+                    <Navigation />
+                    <main role="main">
+                      <BlogPage />
+                    </main>
+                    <Footer />
+                  </RouteErrorBoundary>
+                } />
+                <Route path="/clinic-directory" element={
+                  <RouteErrorBoundary>
+                    <Navigation />
+                    <main role="main">
+                      <ClinicDirectoryPage />
+                    </main>
+                    <Footer />
+                  </RouteErrorBoundary>
+                } />
+                <Route path="/compare" element={
+                  <RouteErrorBoundary>
+                    <Navigation />
+                    <main role="main">
+                      <CompareClinicsPage />
+                    </main>
+                    <Footer />
+                  </RouteErrorBoundary>
+                } />
+                <Route path="/conditions/chronic-pain-article" element={
+                  <RouteErrorBoundary>
+                    <Navigation />
+                    <main role="main">
+                      <ChronicPainConditionPage />
+                    </main>
+                    <Footer />
+                  </RouteErrorBoundary>
+                } />
+                <Route path="/terms" element={
+                  <RouteErrorBoundary>
+                    <Navigation />
+                    <main role="main">
+                      <TermsPage />
+                    </main>
+                    <Footer />
+                  </RouteErrorBoundary>
+                } />
+                <Route path="/privacy" element={
+                  <RouteErrorBoundary>
+                    <Navigation />
+                    <main role="main">
+                      <PrivacyPage />
+                    </main>
+                    <Footer />
+                  </RouteErrorBoundary>
+                } />
+                <Route path="/cookies" element={
+                  <RouteErrorBoundary>
+                    <Navigation />
+                    <main role="main">
+                      <CookiesPage />
+                    </main>
+                    <Footer />
+                  </RouteErrorBoundary>
+                } />
+                <Route path="/faq" element={
+                  <RouteErrorBoundary>
+                    <Navigation />
+                    <main role="main">
+                      <FAQPage />
+                    </main>
+                    <Footer />
+                  </RouteErrorBoundary>
+                } />
+
+                {/* Admin Routes */}
                 <Route path="/admin/setup" element={
                   <RouteErrorBoundary>
                     <AdminSetupPage />
