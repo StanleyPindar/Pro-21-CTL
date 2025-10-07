@@ -307,22 +307,9 @@ const MetaTags = React.memo<MetaTagsProps>(({
           worstRating: 1
         } : undefined,
         medicalSpecialty: medicalBusinessData.specialties || ['Medical Cannabis Treatment'],
-        hasOfferCatalog: {
-          '@type': 'OfferCatalog',
-          name: 'Medical Cannabis Services',
-          itemListElement: (medicalBusinessData.services || ['Medical Cannabis Consultation']).map(service => ({
-            '@type': 'Offer',
-            itemOffered: {
-              '@type': 'MedicalProcedure',
-              name: service
-            },
-            priceSpecification: {
-              '@type': 'PriceSpecification',
-              price: medicalBusinessData.rating ? '150' : '150', // Default consultation price
-              priceCurrency: 'GBP'
-            }
-          }))
-        },
+        serviceType: 'Medical Cannabis Treatment',
+        paymentAccepted: ['Cash', 'Credit Card', 'Bank Transfer'],
+        currenciesAccepted: 'GBP',
         openingHours: medicalBusinessData.openingHours ? 
           Object.entries(medicalBusinessData.openingHours).map(([day, hours]) => 
             `${day.charAt(0).toUpperCase() + day.slice(1)} ${hours}`
@@ -356,19 +343,9 @@ const MetaTags = React.memo<MetaTagsProps>(({
         } : undefined,
         priceRange: clinicData?.priceRange || '£150-£400',
         medicalSpecialty: clinicData?.specialties || ['Medical Cannabis Treatment'],
-        hasOfferCatalog: {
-          '@type': 'OfferCatalog',
-          name: 'Medical Cannabis Services',
-          itemListElement: [
-            {
-              '@type': 'Offer',
-              itemOffered: {
-                '@type': 'MedicalProcedure',
-                name: 'Medical Cannabis Consultation'
-              }
-            }
-          ]
-        }
+        serviceType: 'Medical Cannabis Treatment',
+        paymentAccepted: ['Cash', 'Credit Card', 'Bank Transfer'],
+        currenciesAccepted: 'GBP'
       };
     }
     

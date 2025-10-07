@@ -98,7 +98,11 @@ const FAQPage: React.FC = () => {
       "name": item.question,
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": item.answer
+        "text": item.answer,
+        "author": {
+          "@type": "Organization",
+          "name": "CompareTheLeaf"
+        }
       }
     }))
   };
