@@ -42,10 +42,9 @@ export default function AdminSetupPage() {
             .from('admin_users')
             .upsert([
               {
-                user_id: uid,
+                id: uid,
                 email: email,
-                is_admin: true,
-                is_super_admin: false
+                role: 'admin'
               }
             ]);
 
@@ -72,10 +71,9 @@ export default function AdminSetupPage() {
         .from('admin_users')
         .insert([
           {
-            user_id: uid,
+            id: uid,
             email: email,
-            is_admin: true,
-            is_super_admin: false
+            role: 'admin'
           }
         ]);
 

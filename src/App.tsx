@@ -654,6 +654,16 @@ function App() {
                 } />
 
                 {/* Admin Routes - Public Access */}
+                <Route path="/admin/setup" element={
+                  <RouteErrorBoundary>
+                    <AdminSetupPage />
+                  </RouteErrorBoundary>
+                } />
+                <Route path="/admin/login" element={
+                  <RouteErrorBoundary>
+                    <AdminLoginPage />
+                  </RouteErrorBoundary>
+                } />
                 <Route path="/admin" element={
                   <RouteErrorBoundary>
                     <AdminDashboardPage />

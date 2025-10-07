@@ -11,6 +11,13 @@
     <link rel="manifest" href="/manifest.json">
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Security Meta Tags -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+
     <title>Compare Medical Cannabis Clinics UK - Find Licensed Doctors & Best Prices | CompareTheLeaf</title>
     <meta name="description" content="Compare 20+ verified UK medical cannabis clinics. Find licensed GMC doctors, transparent pricing, patient reviews & instant booking. Used by 60,000+ patients. MHRA regulated clinics.">
     <meta name="keywords" content="find medical cannabis clinic UK, compare medical cannabis clinics UK, UK medical cannabis doctors, medical cannabis cost UK, book medical cannabis consultation, best medical cannabis clinics UK, medical cannabis eligibility UK, online medical cannabis consultation, medical cannabis prescription UK, licensed medical cannabis clinics, urgent medical cannabis UK, how to get medical cannabis UK, medical cannabis treatment UK, MHRA regulated cannabis clinics, medical cannabis specialists UK, cheap medical cannabis consultation UK, affordable medical cannabis UK">
@@ -244,10 +251,12 @@
     <meta property="og:description" content="Compare 20+ verified UK medical cannabis clinics. Find licensed GMC doctors, transparent pricing, patient reviews & instant booking. Used by 60,000+ patients.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://comparetheleaf.co.uk/">
-    <meta property="og:image" content="https://comparetheleaf.co.uk/favicon-512x512.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
-    <meta property="og:image:alt" content="CompareTheLeaf - UK Medical Cannabis Clinic Comparison">
+    <meta property="og:image" content="https://comparetheleaf.co.uk/images/CTL_Logo_Header.webp">
+    <meta property="og:image:secure_url" content="https://comparetheleaf.co.uk/images/CTL_Logo_Header.webp">
+    <meta property="og:image:type" content="image/webp">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="CompareTheLeaf - UK Medical Cannabis Clinic Comparison Platform">
     <meta property="og:site_name" content="CompareTheLeaf">
     <meta property="og:locale" content="en_GB">
     
@@ -255,13 +264,17 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Compare Medical Cannabis Clinics UK - Find Licensed Doctors & Best Prices">
     <meta name="twitter:description" content="Compare 20+ verified UK medical cannabis clinics. Find licensed GMC doctors, transparent pricing, patient reviews & instant booking. Used by 60,000+ patients.">
-    <meta name="twitter:image" content="https://comparetheleaf.co.uk/favicon-512x512.png">
+    <meta name="twitter:image" content="https://comparetheleaf.co.uk/images/CTL_Logo_Header.webp">
+    <meta name="twitter:image:alt" content="CompareTheLeaf - Compare verified UK medical cannabis clinics">
     <meta name="twitter:site" content="@comparetheleaf">
     <meta name="twitter:creator" content="@comparetheleaf">
     
     <!-- Additional SEO Tags -->
     <meta name="theme-color" content="#1A9F52">
-    
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://comparetheleaf.co.uk/">
+
     <!-- Preconnect to external domains for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -351,6 +364,11 @@
       "name": "CompareTheLeaf",
       "url": "https://comparetheleaf.co.uk",
       "description": "UK Medical Cannabis Clinic Comparison Platform",
+      "inLanguage": "en-GB",
+      "publisher": {
+        "@type": "Organization",
+        "name": "CompareTheLeaf"
+      },
       "potentialAction": {
         "@type": "SearchAction",
         "target": "https://comparetheleaf.co.uk/clinics?search={search_term_string}",
@@ -358,8 +376,108 @@
       }
     }
     </script>
-    <script type="module" crossorigin src="/assets/index-BvAmtToY.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-KBMdPPyo.css">
+
+    <!-- Medical WebPage Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "MedicalWebPage",
+      "name": "Compare Medical Cannabis Clinics UK",
+      "url": "https://comparetheleaf.co.uk/",
+      "description": "Compare 20+ verified UK medical cannabis clinics. Find licensed GMC doctors, transparent pricing, patient reviews & instant booking.",
+      "inLanguage": "en-GB",
+      "audience": {
+        "@type": "MedicalAudience",
+        "audienceType": "Patient",
+        "geographicArea": {
+          "@type": "Country",
+          "name": "United Kingdom"
+        }
+      },
+      "about": {
+        "@type": "MedicalBusiness",
+        "name": "UK Medical Cannabis Clinics",
+        "medicalSpecialty": "Medical Cannabis Treatment"
+      },
+      "reviewedBy": {
+        "@type": "Organization",
+        "name": "CompareTheLeaf Medical Team"
+      },
+      "lastReviewed": "2025-10-07",
+      "specialty": "Medical Cannabis Treatment"
+    }
+    </script>
+
+    <!-- BreadcrumbList Schema for Homepage -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://comparetheleaf.co.uk/"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Service Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "serviceType": "Medical Cannabis Clinic Comparison",
+      "provider": {
+        "@type": "Organization",
+        "name": "CompareTheLeaf",
+        "url": "https://comparetheleaf.co.uk"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "United Kingdom"
+      },
+      "audience": {
+        "@type": "MedicalAudience",
+        "audienceType": "Patient"
+      },
+      "category": "Healthcare Comparison",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Medical Cannabis Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Medical Cannabis Clinic Comparison",
+              "description": "Compare verified medical cannabis clinics across the UK"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Eligibility Assessment",
+              "description": "Check if you qualify for medical cannabis treatment"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Cost Calculator",
+              "description": "Estimate medical cannabis treatment costs"
+            }
+          }
+        ]
+      }
+    }
+    </script>
+    <script type="module" crossorigin src="/assets/index-BgERFsfp.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-Dz3kKnCx.css">
   </head>
   <body>
     <div id="root"></div>
