@@ -1,0 +1,37 @@
+# CompareTheLeaf Robots.txt - UK Medical Cannabis Clinic Comparison Platform
+# Updated: 2025-10-07
+
+# Allow all search engines by default
+User-agent: *
+Allow: /
+
+# Disallow admin and private areas
+Disallow: /admin/
+Disallow: /api/internal/
+
+# Sitemap location
+Sitemap: https://comparetheleaf.co.uk/sitemap.xml
+
+# Crawl delay to prevent server overload (optional - uncomment if needed)
+# Crawl-delay: 1
+
+# Additional directives for major search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Allow SEO analysis tools for monitoring (recommended)
+User-agent: AhrefsBot
+Allow: /
+
+User-agent: SEMrushBot
+Allow: /
+
+# Block aggressive crawlers
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: AhrefsBot
+Crawl-delay: 2
