@@ -99,7 +99,7 @@ const CuraleafReviewPage: React.FC = () => {
     <div className="min-h-screen bg-gray-50">
       {slug && ( // Only render MetaTags if slug is available
         <MetaTags
-          title="Curaleaf Review - UK's Most Accessible Medical Cannabis Clinic"
+          title="Curaleaf Review - Accessible UK Medical Cannabis Clinic"
           description={generateClinicMetaDescription(curaleafClinicDataForMeta)}
           keywords={['Curaleaf', 'medical cannabis clinic', 'UK cannabis clinic review', 'free consultation', 'accessible medical cannabis']}
           type="Article"

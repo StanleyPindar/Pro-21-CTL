@@ -97,7 +97,7 @@ const AlternaleafReviewPage: React.FC = () => {
     <div className="min-h-screen bg-gray-50">
       {slug && ( // Only render MetaTags if slug is available
         <MetaTags
-          title="Alternaleaf Review - UK's Most Affordable Medical Cannabis Clinic"
+          title="Alternaleaf Review - Affordable UK Medical Cannabis Clinic"
           description={generateClinicMetaDescription(alternaleafClinicDataForMeta)}
           keywords={['Alternaleaf', 'medical cannabis clinic', 'UK cannabis clinic review', 'affordable medical cannabis', 'subscription model']}
           type="Article"

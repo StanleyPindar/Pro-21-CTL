@@ -102,7 +102,7 @@ const BirminghamCannabisCareReviewPage: React.FC = () => {
     <div className="min-h-screen bg-gray-50">
       {slug && ( // Only render MetaTags if slug is available
         <MetaTags
-          title="Birmingham Cannabis Clinic Review - West Midlands Face-to-Face Medical Cannabis Clinic"
+          title="Birmingham Cannabis Clinic Review - West Midlands Clinic"
           description={generateClinicMetaDescription(bccClinicDataForMeta)}
           keywords={['Birmingham Cannabis Clinic', 'medical cannabis clinic', 'UK cannabis clinic review', 'face-to-face medical cannabis', 'chronic pain clinic']}
           type="Article"

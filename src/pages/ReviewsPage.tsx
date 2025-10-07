@@ -183,8 +183,8 @@ const ReviewsPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       <MetaTags 
-        title="Medical Cannabis Clinic Reviews UK - 2,000+ Patient Reviews & Ratings"
-        description="Medical cannabis clinic reviews UK. 2,000+ verified patient reviews, clinic ratings & treatment outcomes. Compare experiences, find best clinics for your condition. Real testimonials."
+        title="UK Medical Cannabis Clinic Reviews - 2,000+ Patient Ratings"
+        description="Compare UK medical cannabis clinics with 2,000+ verified patient reviews. Find the best clinic for your needs with detailed ratings and costs."
         keywords={[
           'medical cannabis clinic reviews UK',
           'medical cannabis patient reviews',
@@ -199,7 +199,14 @@ const ReviewsPage: React.FC = () => {
           'compare medical cannabis clinics UK',
           'medical cannabis clinic UK'
         ]}
+        type="Article"
         canonicalUrl="https://comparetheleaf.co.uk/reviews"
+        reviewData={{
+          rating: 4.3,
+          reviewCount: 2000,
+          bestRating: 5,
+          worstRating: 1
+        }}
       />
       
       {/* Breadcrumbs */}

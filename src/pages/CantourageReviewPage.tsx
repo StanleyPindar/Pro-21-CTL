@@ -96,7 +96,7 @@ const CantourageReviewPage: React.FC = () => {
     <div className="min-h-screen bg-gray-50">
       {slug && ( // Only render MetaTags if slug is available
         <MetaTags
-          title="Cantourage Clinic Review - Veterans-Focused Medical Cannabis Clinic"
+          title="Cantourage Review - Veterans Medical Cannabis Clinic"
           description={generateClinicMetaDescription(cantourageClinicDataForMeta)}
           keywords={['Cantourage', 'medical cannabis clinic', 'UK cannabis clinic review', 'veterans medical cannabis', 'PTSD treatment']}
           type="Article"

@@ -6,6 +6,8 @@ import { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabase';
 import StarRating from '../components/common/StarRating';
 import { sanitizeHtml } from '../utils/sanitizeHtml';
+import MetaTags from '../components/MetaTags';
+import Breadcrumbs from '../components/Breadcrumbs';
 
 const ReviewDetailPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -142,6 +144,29 @@ const ReviewDetailPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <MetaTags
+        title={`${story.title} - Patient Review`}
+        description={story.content ? story.content.substring(0, 150).replace(/<[^>]*>/g, '') + '...' : `Patient review and experience with ${story.clinic}`}
+        keywords={['patient review', 'medical cannabis', story.clinic, 'UK treatment', story.condition]}
+        type="Article"
+        canonicalUrl={`https://comparetheleaf.co.uk/reviews/patient/${slug}`}
+        reviewData={{
+          rating: story.rating,
+          reviewCount: 1,
+          bestRating: 5,
+          worstRating: 1
+        }}
+      />
+
+      {/* Breadcrumbs */}
+      <Breadcrumbs 
+        items={[
+          { label: 'Home', path: '/' },
+          { label: 'Reviews', path: '/reviews' },
+          { label: story.title, path: `/reviews/patient/${slug}` }
+        ]}
+      />
+
       {/* Header */}
       <div className="bg-white shadow-sm">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">

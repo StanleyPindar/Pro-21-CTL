@@ -43,13 +43,19 @@ const ClinicReviewArticlePage: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       <MetaTags
-        title={review.title}
+        title={`${review.title} - Medical Cannabis Clinic Review`}
         description={review.excerpt}
         datePublished={review.date}
         author={review.author}
         type="Article"
-        keywords={['clinic review', review.clinicId, review.title.toLowerCase()]}
+        keywords={['clinic review', review.clinicId, review.title.toLowerCase(), 'medical cannabis clinic', 'UK cannabis treatment']}
         canonicalUrl={`https://comparetheleaf.co.uk/reviews/article/${review.slug}`}
+        reviewData={{
+          rating: review.rating || 4.5,
+          reviewCount: 1,
+          bestRating: 5,
+          worstRating: 1
+        }}
       />
 
       {/* Breadcrumbs */}

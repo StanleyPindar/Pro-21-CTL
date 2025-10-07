@@ -89,54 +89,52 @@ const ClinicReviewPage = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {slug && ( // Only render MetaTags if slug is available
-        <MetaTags
-          title={`${clinic.name} Review - Comprehensive Medical Cannabis Clinic Analysis`}
-          description={generateClinicMetaDescription(clinic)}
-          keywords={[
-            `${clinic.name} review`,
-            'medical cannabis clinic review',
-            'UK cannabis clinic review',
-            ...(clinic.specialisations || []).map((s: string) => `medical cannabis for ${s.toLowerCase()}`),
-            `medical cannabis clinic ${clinic.location || 'UK'}`
-          ]}
-          canonicalUrl={`https://comparetheleaf.co.uk/reviews/${slug}`}
-          type="Article"
-          reviewData={{
-            rating: clinic.rating || 0,
-            reviewCount: clinic.review_count || 0,
-            bestRating: 5,
-            worstRating: 1
-          }}
-          medicalBusinessData={{
-            name: clinic.name || '',
-            address: { 
-              city: clinic.location || 'UK',
-              street: '',
-              postcode: '',
-              region: clinic.location || 'UK'
-            },
-            phone: clinic.phone || '',
-            email: clinic.email || '',
-            website: clinic.website || '',
-            rating: clinic.rating || 0,
-            reviewCount: clinic.review_count || 0,
-            priceRange: `£${clinic.consultation_fee || 150}-£${clinic.annual_cost || 2000}`,
-            specialties: clinic.specialisations || ['Medical Cannabis Treatment'],
-            services: [
-              'Medical Cannabis Consultation',
-              'Medical Cannabis Prescription',
-              'Follow-up Care',
-              'Patient Support'
-            ]
-          }}
-          breadcrumbData={[
-            { name: 'Home', url: 'https://comparetheleaf.co.uk/' },
-            { name: 'Reviews', url: 'https://comparetheleaf.co.uk/reviews' },
-            { name: `${clinic.name} Review`, url: `https://comparetheleaf.co.uk/reviews/${slug}` }
-          ]}
-        />
-      )}
+      <MetaTags
+        title={`${clinic.name} Review - Medical Cannabis Clinic`}
+        description={generateClinicMetaDescription(clinic)}
+        keywords={[
+          `${clinic.name} review`,
+          'medical cannabis clinic review',
+          'UK cannabis clinic review',
+          ...(clinic.specialisations || []).map((s: string) => `medical cannabis for ${s.toLowerCase()}`),
+          `medical cannabis clinic ${clinic.location || 'UK'}`
+        ]}
+        canonicalUrl={`https://comparetheleaf.co.uk/reviews/${slug}`}
+        type="Article"
+        reviewData={{
+          rating: clinic.rating || 0,
+          reviewCount: clinic.review_count || 0,
+          bestRating: 5,
+          worstRating: 1
+        }}
+        medicalBusinessData={{
+          name: clinic.name || '',
+          address: { 
+            city: clinic.location || 'UK',
+            street: '',
+            postcode: '',
+            region: clinic.location || 'UK'
+          },
+          phone: clinic.phone || '',
+          email: clinic.email || '',
+          website: clinic.website || '',
+          rating: clinic.rating || 0,
+          reviewCount: clinic.review_count || 0,
+          priceRange: `£${clinic.consultation_fee || 150}-£${clinic.annual_cost || 2000}`,
+          specialties: clinic.specialisations || ['Medical Cannabis Treatment'],
+          services: [
+            'Medical Cannabis Consultation',
+            'Medical Cannabis Prescription',
+            'Follow-up Care',
+            'Patient Support'
+          ]
+        }}
+        breadcrumbData={[
+          { name: 'Home', url: 'https://comparetheleaf.co.uk/' },
+          { name: 'Reviews', url: 'https://comparetheleaf.co.uk/reviews' },
+          { name: `${clinic.name} Review`, url: `https://comparetheleaf.co.uk/reviews/${slug}` }
+        ]}
+      />
       
       {/* Breadcrumbs */}
       <Breadcrumbs 
