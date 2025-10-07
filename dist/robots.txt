@@ -25,6 +25,7 @@ Allow: /
 # Allow SEO analysis tools for monitoring (recommended)
 User-agent: AhrefsBot
 Allow: /
+Crawl-delay: 2
 
 User-agent: SEMrushBot
 Allow: /
@@ -32,6 +33,3 @@ Allow: /
 # Block aggressive crawlers
 User-agent: MJ12bot
 Disallow: /
-
-User-agent: AhrefsBot
-Crawl-delay: 2

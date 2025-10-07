@@ -347,7 +347,7 @@ const FindMyClinicPage: React.FC = () => {
                     <Calendar className="ml-2 h-4 w-4" />
                   </button>
                   <button
-                    onClick={() => navigate(`/clinic/${match.clinic.overview?.id}`)}
+                    onClick={() => navigate(`/clinics/${match.clinic.overview?.id}`)}
                     className="flex-1 border border-gray-300 text-gray-700 px-6 py-3 rounded-lg hover:bg-gray-50 transition-colors font-medium flex items-center justify-center"
                   >
                     View Full Profile

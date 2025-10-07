@@ -167,7 +167,7 @@ const ResultsPage: React.FC = () => {
   
   // Handle view profile click
   const handleViewProfile = (clinicId: string) => {
-    navigate(`/clinic/${clinicId}`);
+    navigate(`/clinics/${clinicId}`);
   };
 
   if (loading) {
