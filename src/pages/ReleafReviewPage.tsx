@@ -8,12 +8,16 @@ import MedicalDisclaimer from '../components/MedicalDisclaimer';
 import { generateClinicMetaDescription } from '../utils/metaDescriptionGenerator';
 import MetaTags from '../components/MetaTags';
 import ReleafOfferPopup from '../components/ReleafOfferPopup';
-import { useExitIntent } from '../hooks/useExitIntent';
+import { usePopupTrigger } from '../hooks/usePopupTrigger';
 
 const ReleafReviewPage: React.FC = () => {
   const navigate = useNavigate();
   const { slug } = useParams<{ slug: string }>();
-  const { showExitIntent, resetIntent } = useExitIntent({ enabled: true });
+  const { showPopup, closePopup } = usePopupTrigger({
+    enableScrollDepth: true,
+    scrollThreshold: 50,
+    enabled: true
+  });
 
   const clinicData = {
     name: 'Releaf',
@@ -617,7 +621,7 @@ const ReleafReviewPage: React.FC = () => {
         </div>
       </div>
 
-      <ReleafOfferPopup isOpen={showExitIntent} onClose={resetIntent} />
+      <ReleafOfferPopup isOpen={showPopup} onClose={closePopup} />
     </div>
   );
 };
