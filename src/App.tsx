@@ -515,6 +515,7 @@ function App() {
                     <Footer />
                   </RouteErrorBoundary>
                 } />
+
                 <Route path="/education/hub" element={
                   <RouteErrorBoundary>
                     <Navigation />
@@ -680,15 +681,7 @@ function App() {
                     <Footer />
                   </RouteErrorBoundary>
                 } />
-                <Route path="/clinic-directory" element={
-                  <RouteErrorBoundary>
-                    <Navigation />
-                    <main role="main">
-                      <ClinicDirectoryPage />
-                    </main>
-                    <Footer />
-                  </RouteErrorBoundary>
-                } />
+
                 <Route path="/compare" element={
                   <RouteErrorBoundary>
                     <Navigation />
@@ -698,15 +691,7 @@ function App() {
                     <Footer />
                   </RouteErrorBoundary>
                 } />
-                <Route path="/conditions/chronic-pain-article" element={
-                  <RouteErrorBoundary>
-                    <Navigation />
-                    <main role="main">
-                      <ChronicPainConditionPage />
-                    </main>
-                    <Footer />
-                  </RouteErrorBoundary>
-                } />
+
                 <Route path="/terms" element={
                   <RouteErrorBoundary>
                     <Navigation />
