@@ -1,12 +1,28 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Calculator, CheckSquare, Star, FileText, ArrowRight } from 'lucide-react';
+import { Calculator, CheckSquare, Star, FileText, ArrowRight, ClipboardCheck } from 'lucide-react';
 import MetaTags from '../components/MetaTags';
 
 const ToolsPage: React.FC = () => {
   const navigate = useNavigate();
 
   const tools = [
+    {
+      id: 'eligibility-assessment',
+      title: 'Comprehensive Eligibility Assessment',
+      description: 'Take our detailed 15-question assessment to understand your eligibility and get matched with specialist clinics based on your condition and preferences.',
+      icon: ClipboardCheck,
+      color: 'bg-blue-100 text-blue-600',
+      path: '/eligibility',
+      featured: true,
+      features: [
+        'Comprehensive 15-question assessment',
+        'Personalized clinic recommendations',
+        'Dynamic question flow based on your responses',
+        'Instant eligibility determination',
+        'Email results for later reference'
+      ]
+    },
     {
       id: 'budget-calculator',
       title: 'Medical Cannabis Budget Calculator',
@@ -23,10 +39,10 @@ const ToolsPage: React.FC = () => {
     },
     {
       id: 'qualification-checker',
-      title: 'Qualification Checker',
-      description: 'Answer a few questions to see if you might qualify for medical cannabis treatment under current UK guidelines.',
+      title: 'Quick Qualification Checker',
+      description: 'Quick 3-question check to see if you might qualify for medical cannabis treatment under current UK guidelines.',
       icon: CheckSquare,
-      color: 'bg-blue-100 text-blue-600',
+      color: 'bg-purple-100 text-purple-600',
       path: '/qualify',
       features: [
         'Based on current UK eligibility criteria',
@@ -96,10 +112,19 @@ const ToolsPage: React.FC = () => {
             {tools.map((tool) => {
               const IconComponent = tool.icon;
               return (
-                <div 
+                <div
                   key={tool.id}
-                  className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden border border-gray-100"
+                  className={`bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden ${
+                    tool.featured
+                      ? 'border-2 border-blue-600 relative'
+                      : 'border border-gray-100'
+                  }`}
                 >
+                  {tool.featured && (
+                    <div className="absolute top-0 right-0 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">
+                      NEW
+                    </div>
+                  )}
                   <div className="p-8">
                     <div className="flex items-center mb-4">
                       <div className={`inline-flex items-center justify-center w-12 h-12 rounded-lg ${tool.color} mr-4`}>

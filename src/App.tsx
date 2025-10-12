@@ -91,9 +91,11 @@ const BirminghamCannabisCareReviewPage = lazy(() => import('./pages/BirminghamCa
 const CuraleafReviewPage = lazy(() => import('./pages/CuraleafReviewPage'));
 
 // Landing pages
-
 const FindMyClinicPage = lazy(() => import('./pages/FindMyClinicPage'));
 
+// Eligibility Assessment pages
+const EligibilityCheckerPage = lazy(() => import('./pages/EligibilityCheckerPage'));
+const EligibilityResultsPage = lazy(() => import('./pages/EligibilityResultsPage'));
 
 // Admin pages - heavily lazy loaded since rarely used
 const AdminLoginPage = lazy(() => import('./pages/admin/AdminLoginPage'));
@@ -304,6 +306,20 @@ function App() {
                     <Navigation />
                     <main role="main">
                       <QualificationCheckerPage />
+                    </main>
+                    <Footer />
+                  </RouteErrorBoundary>
+                } />
+                <Route path="/eligibility" element={
+                  <RouteErrorBoundary>
+                    <EligibilityCheckerPage />
+                  </RouteErrorBoundary>
+                } />
+                <Route path="/eligibility/results" element={
+                  <RouteErrorBoundary>
+                    <Navigation />
+                    <main role="main">
+                      <EligibilityResultsPage />
                     </main>
                     <Footer />
                   </RouteErrorBoundary>
