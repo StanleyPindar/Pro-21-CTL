@@ -35,6 +35,7 @@ const EmailCaptureModal: React.FC<EmailCaptureModalProps> = ({ isOpen, onClose, 
             <button
               onClick={onClose}
               className="text-gray-400 hover:text-gray-600 transition-colors"
+              title="Skip email capture"
             >
               <X className="h-6 w-6" />
             </button>
@@ -104,7 +105,7 @@ const EmailCaptureModal: React.FC<EmailCaptureModalProps> = ({ isOpen, onClose, 
               </div>
             </div>
 
-            <div className="mt-8">
+            <div className="mt-8 space-y-3">
               <button
                 type="submit"
                 disabled={isSubmitting || !email}
@@ -118,6 +119,13 @@ const EmailCaptureModal: React.FC<EmailCaptureModalProps> = ({ isOpen, onClose, 
                     Get My Results
                   </>
                 )}
+              </button>
+              <button
+                type="button"
+                onClick={onClose}
+                className="w-full bg-white text-gray-700 py-3 px-6 rounded-lg border border-gray-300 hover:bg-gray-50 transition-all duration-200 font-medium"
+              >
+                Continue Without Email
               </button>
             </div>
 

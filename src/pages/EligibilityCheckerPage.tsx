@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { ChevronRight, Users } from 'lucide-react';
+import { useNavigate, Link } from 'react-router-dom';
+import { ChevronRight, Users, X, RotateCcw, ChevronLeft } from 'lucide-react';
 import MetaTags from '../components/MetaTags';
 import ProgressBar from '../components/eligibility/ProgressBar';
 import QuestionStep from '../components/eligibility/QuestionStep';
@@ -23,6 +23,7 @@ const EligibilityCheckerPage: React.FC = () => {
   const [stepStartTime, setStepStartTime] = useState(Date.now());
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [completedAssessments] = useState(1247);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   useEffect(() => {
     const newSessionId = EligibilityService.getSessionId();
@@ -123,8 +124,39 @@ const EligibilityCheckerPage: React.FC = () => {
     setShowEmailModal(false);
   };
 
+  const handleSkipEmail = () => {
+    setEmailCaptured(true);
+    setShowEmailModal(false);
+  };
+
+  const handleReset = () => {
+    if (window.confirm('Are you sure you want to restart the assessment? All progress will be lost.')) {
+      EligibilityService.clearProgress();
+      setCurrentStep(1);
+      setResponses({});
+      setEmailCaptured(false);
+      setSubmitError(null);
+      setIsSubmitting(false);
+      localStorage.setItem('ctq_assessment_started', Date.now().toString());
+    }
+  };
+
+  const handleBack = () => {
+    if (currentStep > 1) {
+      let prevStep = currentStep - 1;
+      while (prevStep > 0) {
+        if (!shouldSkipQuestion(eligibilityQuestions[prevStep - 1])) {
+          break;
+        }
+        prevStep--;
+      }
+      setCurrentStep(Math.max(1, prevStep));
+    }
+  };
+
   const handleSubmit = async () => {
     setIsSubmitting(true);
+    setSubmitError(null);
 
     try {
       const eligibility = calculateEligibility(responses);
@@ -149,6 +181,7 @@ const EligibilityCheckerPage: React.FC = () => {
       });
     } catch (error) {
       console.error('Error calculating eligibility:', error);
+      setSubmitError('Unable to calculate results. Please try again.');
       setIsSubmitting(false);
     }
   };
@@ -171,6 +204,23 @@ const EligibilityCheckerPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50">
+      <div className="bg-white border-b border-gray-200 shadow-sm sticky top-0 z-40">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            <Link to="/" className="flex items-center text-gray-600 hover:text-gray-900 transition-colors">
+              <X className="h-5 w-5 mr-2" />
+              <span className="font-medium">Exit Assessment</span>
+            </Link>
+            <button
+              onClick={handleReset}
+              className="flex items-center text-gray-600 hover:text-gray-900 transition-colors"
+            >
+              <RotateCcw className="h-5 w-5 mr-2" />
+              <span className="font-medium">Reset</span>
+            </button>
+          </div>
+        </div>
+      </div>
       <MetaTags
         title="Medical Cannabis Eligibility Assessment UK - Check If You Qualify"
         description="Take our comprehensive 15-question medical cannabis eligibility assessment. Get personalized clinic recommendations and understand your qualification status in minutes."
@@ -213,7 +263,28 @@ const EligibilityCheckerPage: React.FC = () => {
           />
 
           <div className="mt-10 pt-6 border-t border-gray-200">
-            <div className="flex justify-end">
+            {submitError && (
+              <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-800">
+                <p className="font-medium">{submitError}</p>
+                <button
+                  onClick={() => setSubmitError(null)}
+                  className="mt-2 text-sm underline hover:no-underline"
+                >
+                  Dismiss
+                </button>
+              </div>
+            )}
+            <div className="flex justify-between items-center">
+              {currentStep > 1 && (
+                <button
+                  onClick={handleBack}
+                  className="inline-flex items-center px-6 py-3 text-gray-700 bg-white border border-gray-300 rounded-xl hover:bg-gray-50 transition-all duration-200 shadow-sm"
+                >
+                  <ChevronLeft className="mr-2 h-5 w-5" />
+                  Back
+                </button>
+              )}
+              <div className="flex-1"></div>
               <button
                 onClick={handleNext}
                 disabled={!isStepValid() || isSubmitting}
@@ -244,7 +315,7 @@ const EligibilityCheckerPage: React.FC = () => {
 
       <EmailCaptureModal
         isOpen={showEmailModal}
-        onClose={() => setShowEmailModal(false)}
+        onClose={handleSkipEmail}
         onSubmit={handleEmailSubmit}
       />
     </div>
