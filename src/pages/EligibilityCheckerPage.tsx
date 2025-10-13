@@ -130,13 +130,15 @@ const EligibilityCheckerPage: React.FC = () => {
       const eligibility = calculateEligibility(responses);
       const clinicMatches = matchClinics(responses, clinics);
 
-      await EligibilityService.saveAssessmentResult(
+      EligibilityService.saveAssessmentResult(
         sessionId,
         responses,
         eligibility.status,
         eligibility.confidence,
         clinicMatches
-      );
+      ).catch(error => {
+        console.error('Error saving assessment to database:', error);
+      });
 
       navigate('/eligibility/results', {
         state: {
@@ -146,7 +148,7 @@ const EligibilityCheckerPage: React.FC = () => {
         }
       });
     } catch (error) {
-      console.error('Error submitting assessment:', error);
+      console.error('Error calculating eligibility:', error);
       setIsSubmitting(false);
     }
   };
