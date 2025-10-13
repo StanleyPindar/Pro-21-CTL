@@ -91,6 +91,11 @@ export function matchClinics(
   responses: AssessmentResponses,
   clinics: FullClinicProfile[]
 ): ClinicMatchScore[] {
+  if (!Array.isArray(clinics) || clinics.length === 0) {
+    console.warn('No clinics available for matching');
+    return [];
+  }
+
   const condition = responses.condition as string;
   const budget = responses.budget as string;
   const consultationPreference = responses['consultation-preference'] as string;
@@ -98,6 +103,12 @@ export function matchClinics(
   const severity = parseInt(responses.severity as string) || 0;
 
   const matches = clinics.map(clinic => {
+    if (!clinic || !clinic.overview) {
+      console.warn('Invalid clinic data encountered:', clinic);
+      return null;
+    }
+
+    try {
     let totalScore = 0;
     const reasons: string[] = [];
     const breakdown = {
@@ -163,7 +174,11 @@ export function matchClinics(
       reasons: reasons.slice(0, 4),
       breakdown
     };
-  });
+    } catch (error) {
+      console.error('Error scoring clinic:', clinic.overview?.name, error);
+      return null;
+    }
+  }).filter((match): match is ClinicMatchScore => match !== null);
 
   return matches
     .sort((a, b) => b.score - a.score)

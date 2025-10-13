@@ -13,7 +13,7 @@ import { useClinicData } from '../context/ClinicDataProvider';
 
 const EligibilityCheckerPage: React.FC = () => {
   const navigate = useNavigate();
-  const { clinics } = useClinicData();
+  const { clinics, isLoading: clinicsLoading } = useClinicData();
 
   const [currentStep, setCurrentStep] = useState(1);
   const [responses, setResponses] = useState<AssessmentResponses>({});
@@ -159,8 +159,34 @@ const EligibilityCheckerPage: React.FC = () => {
     setSubmitError(null);
 
     try {
+      console.log('Calculating eligibility with responses:', responses);
+      console.log('Clinics loading:', clinicsLoading);
+      console.log('Available clinics:', clinics?.length || 0);
+
+      if (!responses.condition) {
+        throw new Error('Missing condition information');
+      }
+
+      if (clinicsLoading) {
+        setSubmitError('Loading clinic data, please wait a moment and try again...');
+        setIsSubmitting(false);
+        return;
+      }
+
       const eligibility = calculateEligibility(responses);
-      const clinicMatches = matchClinics(responses, clinics);
+      console.log('Eligibility calculated:', eligibility);
+
+      const validClinics = Array.isArray(clinics) ? clinics : [];
+      console.log('Valid clinics count:', validClinics.length);
+
+      if (validClinics.length === 0) {
+        console.warn('No clinics available - proceeding without clinic matches');
+      }
+
+      const clinicMatches = validClinics.length > 0
+        ? matchClinics(responses, validClinics)
+        : [];
+      console.log('Clinic matches:', clinicMatches.length);
 
       EligibilityService.saveAssessmentResult(
         sessionId,
@@ -181,7 +207,9 @@ const EligibilityCheckerPage: React.FC = () => {
       });
     } catch (error) {
       console.error('Error calculating eligibility:', error);
-      setSubmitError('Unable to calculate results. Please try again.');
+      console.error('Error details:', error);
+      console.error('Stack:', error instanceof Error ? error.stack : 'No stack');
+      setSubmitError(`Unable to calculate results: ${error instanceof Error ? error.message : 'Unknown error'}. Please try again.`);
       setIsSubmitting(false);
     }
   };
