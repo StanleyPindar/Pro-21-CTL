@@ -19,20 +19,42 @@ const EligibilityResultsPage: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { clinics } = useClinicData();
+  const [isRedirecting, setIsRedirecting] = React.useState(false);
 
   const state = location.state as LocationState;
 
   useEffect(() => {
     if (!state || !state.eligibility) {
-      navigate('/eligibility');
+      console.warn('No eligibility state found, redirecting to assessment');
+      setIsRedirecting(true);
+      const timer = setTimeout(() => {
+        navigate('/eligibility', { replace: true });
+      }, 100);
+      return () => clearTimeout(timer);
     }
   }, [state, navigate]);
 
   if (!state || !state.eligibility) {
+    if (isRedirecting) {
+      return (
+        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50 flex items-center justify-center">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+            <p className="text-gray-600">Redirecting to assessment...</p>
+          </div>
+        </div>
+      );
+    }
     return null;
   }
 
   const { eligibility, clinicMatches, responses } = state;
+
+  console.log('EligibilityResultsPage rendering with:', {
+    eligibility,
+    clinicMatchesCount: clinicMatches?.length || 0,
+    clinicsAvailable: clinics?.length || 0
+  });
 
   const getStatusConfig = () => {
     switch (eligibility.status) {
@@ -87,7 +109,11 @@ const EligibilityResultsPage: React.FC = () => {
   const StatusIcon = statusConfig.icon;
 
   const getClinicDetails = (match: ClinicMatchScore) => {
-    return clinics.find(c => c.overview.id === match.clinicId);
+    if (!clinics || clinics.length === 0) {
+      console.warn('No clinics available for matching');
+      return undefined;
+    }
+    return clinics.find(c => c?.overview?.id === match.clinicId);
   };
 
   return (
