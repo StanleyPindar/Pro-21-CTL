@@ -74,6 +74,10 @@ const ChronicPainPage: React.FC = () => {
       <MetaTags 
         title="Medical Cannabis for Chronic Pain UK - 45+ Specialist Clinics & Treatment Guide"
         description="Medical cannabis for chronic pain UK. 45+ specialist clinics, GMC registered doctors, treatment options & patient reviews. Book consultations for fibromyalgia, arthritis, back pain. MHRA regulated."
+        type="Article"
+        datePublished="2024-01-10"
+        dateModified={new Date().toISOString().split('T')[0]}
+        author="Dr. James Mitchell, Pain Management Specialist"
         keywords={[
           'medical cannabis for chronic pain UK',
           'chronic pain medical cannabis',

@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, CheckCircle, AlertTriangle, Calendar, FileText, Stethoscope, CreditCard, Clock, Phone } from 'lucide-react';
 import Breadcrumbs from '../components/Breadcrumbs';
+import MetaTags from '../components/MetaTags';
 
 const HowToGetPrescriptionPage: React.FC = () => {
   const navigate = useNavigate();
@@ -132,6 +133,27 @@ const HowToGetPrescriptionPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <MetaTags
+        title="How to Get a Medical Cannabis Prescription in the UK"
+        description="Complete step-by-step guide to obtaining a medical cannabis prescription in the UK. Learn about eligibility requirements, the consultation process, costs, and what to expect at each stage."
+        type="Article"
+        datePublished="2024-01-20"
+        dateModified={new Date().toISOString().split('T')[0]}
+        author="CompareTheLeaf Medical Team"
+        keywords={[
+          'medical cannabis prescription UK',
+          'how to get medical cannabis',
+          'UK cannabis prescription process',
+          'medical marijuana prescription',
+          'cannabis clinic consultation',
+          'medical cannabis eligibility',
+          'prescription cannabis UK guide'
+        ]}
+        canonicalUrl="https://comparetheleaf.co.uk/education/how-to-get-prescription"
+        image="https://comparetheleaf.co.uk/images/prescription-guide.jpg"
+        imageAlt="How to Get a Medical Cannabis Prescription UK Guide"
+      />
+
       {/* Breadcrumbs */}
       <Breadcrumbs 
         items={[

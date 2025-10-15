@@ -12,11 +12,23 @@ const UKCompleteGuidePage: React.FC = () => {
       <MetaTags 
         title="UK Complete Guide to Medical Cannabis"
         description="A comprehensive overview of medical cannabis in the United Kingdom, including legal framework, qualifying conditions, prescription process, and patient information."
+        type="Article"
         datePublished="2024-01-15"
         dateModified="2024-02-10"
-        author="Dr. Sarah Williams"
-        keywords={['UK medical cannabis', 'legal framework', 'qualifying conditions', 'prescription process', 'patient rights']}
+        author="Dr. Sarah Williams, Medical Cannabis Specialist"
+        keywords={[
+          'UK medical cannabis',
+          'medical cannabis UK guide',
+          'legal framework',
+          'qualifying conditions',
+          'prescription process',
+          'patient rights',
+          'UK cannabis law',
+          'medical marijuana UK'
+        ]}
         canonicalUrl="https://comparetheleaf.co.uk/education/uk-complete-guide"
+        image="https://comparetheleaf.co.uk/images/uk-guide-hero.jpg"
+        imageAlt="UK Medical Cannabis Complete Guide"
       />
       
       {/* Breadcrumbs */}
