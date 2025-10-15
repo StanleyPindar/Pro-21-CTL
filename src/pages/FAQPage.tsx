@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Helmet } from 'react-helmet-async';
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/24/outline';
 import Breadcrumbs from '../components/Breadcrumbs';
+import MetaTags from '../components/MetaTags';
 
 interface FAQItem {
   question: string;
@@ -90,41 +90,34 @@ const FAQPage: React.FC = () => {
     );
   };
 
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": faqData.map(item => ({
-      "@type": "Question",
-      "name": item.question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": item.answer,
-        "author": {
-          "@type": "Organization",
-          "name": "CompareTheLeaf"
-        }
-      }
-    }))
-  };
+  // Prepare FAQ data for MetaTags component
+  const faqSchemaData = faqData.map(item => ({
+    question: item.question,
+    answer: item.answer,
+    author: 'CompareTheLeaf Medical Team'
+  }));
 
   return (
     <>
-      <Helmet>
-        <title>Frequently Asked Questions | CompareTheLeaf</title>
-        <meta name="description" content="Get answers to common questions about medical cannabis clinics, treatments, costs, and using CompareTheLeaf's comparison service in the UK." />
-        <meta name="keywords" content="medical cannabis FAQ, UK cannabis clinics, medical marijuana questions, cannabis treatment, CompareTheLeaf" />
-        <link rel="canonical" href="https://comparetheleaf.co.uk/faq" />
-        <meta property="og:title" content="Frequently Asked Questions | CompareTheLeaf" />
-        <meta property="og:description" content="Get answers to common questions about medical cannabis clinics and treatments in the UK." />
-        <meta property="og:url" content="https://comparetheleaf.co.uk/faq" />
-        <meta property="og:type" content="website" />
-        <meta name="twitter:card" content="summary" />
-        <meta name="twitter:title" content="Frequently Asked Questions | CompareTheLeaf" />
-        <meta name="twitter:description" content="Get answers to common questions about medical cannabis clinics and treatments in the UK." />
-        <script type="application/ld+json">
-          {JSON.stringify(structuredData)}
-        </script>
-      </Helmet>
+      <MetaTags
+        title="Frequently Asked Questions"
+        description="Get answers to common questions about medical cannabis clinics, treatments, costs, and using CompareTheLeaf's comparison service in the UK."
+        keywords={[
+          'medical cannabis FAQ',
+          'UK cannabis clinics',
+          'medical marijuana questions',
+          'cannabis treatment',
+          'CompareTheLeaf',
+          'medical cannabis questions',
+          'UK medical cannabis FAQ',
+          'cannabis clinic questions'
+        ]}
+        canonicalUrl="https://comparetheleaf.co.uk/faq"
+        type="FAQPage"
+        faqData={faqSchemaData}
+        datePublished="2024-01-15"
+        dateModified={new Date().toISOString().split('T')[0]}
+      />
 
       <div className="min-h-screen bg-gray-50">
         <div className="container mx-auto px-4 py-8">
