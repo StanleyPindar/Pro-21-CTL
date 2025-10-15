@@ -281,9 +281,12 @@ const MetaTags = React.memo<MetaTagsProps>(({
       };
     }
     
-    // Add medical business schema
+    // Add medical business schema with review schema
     if (medicalBusinessData) {
-      return {
+      const schemas = [];
+      
+      // Main MedicalBusiness schema
+      const businessSchema = {
         '@context': 'https://schema.org',
         '@type': 'MedicalBusiness',
         name: medicalBusinessData.name,
@@ -315,6 +318,55 @@ const MetaTags = React.memo<MetaTagsProps>(({
             `${day.charAt(0).toUpperCase() + day.slice(1)} ${hours}`
           ) : undefined
       };
+      
+      schemas.push(businessSchema);
+      
+      // Add individual Review schema if reviewData is provided
+      if (reviewData && reviewData.rating) {
+        const reviewSchema = {
+          '@context': 'https://schema.org',
+          '@type': 'Review',
+          '@id': `${currentUrl}#review`,
+          itemReviewed: {
+            '@type': 'MedicalBusiness',
+            name: medicalBusinessData.name,
+            url: medicalBusinessData.website || currentUrl,
+            telephone: medicalBusinessData.phone,
+            address: {
+              '@type': 'PostalAddress',
+              addressLocality: medicalBusinessData.address.city,
+              addressCountry: 'GB'
+            }
+          },
+          author: {
+            '@type': 'Organization',
+            name: 'CompareTheLeaf Editorial Team',
+            url: 'https://comparetheleaf.co.uk/about'
+          },
+          reviewRating: {
+            '@type': 'Rating',
+            ratingValue: reviewData.rating,
+            bestRating: reviewData.bestRating || 5,
+            worstRating: reviewData.worstRating || 1
+          },
+          reviewBody: description,
+          datePublished: dates.formattedPublishDate,
+          dateModified: dates.formattedModifiedDate,
+          publisher: {
+            '@type': 'Organization',
+            name: 'CompareTheLeaf',
+            url: 'https://comparetheleaf.co.uk',
+            logo: {
+              '@type': 'ImageObject',
+              url: 'https://comparetheleaf.co.uk/images/CTL_Logo_384 (1).webp'
+            }
+          }
+        };
+        
+        schemas.push(reviewSchema);
+      }
+      
+      return schemas;
     }
     
     // Add specific schema based on type
@@ -668,10 +720,23 @@ const MetaTags = React.memo<MetaTagsProps>(({
     document.head.appendChild(canonical);
 
     // Add structured data
-    const schemaScript = document.createElement('script');
-    schemaScript.type = 'application/ld+json';
-    schemaScript.textContent = JSON.stringify(schema);
-    document.head.appendChild(schemaScript);
+    // Handle both single schema objects and arrays of schemas
+    if (Array.isArray(schema)) {
+      // If schema is an array, add each schema as a separate script tag
+      schema.forEach((schemaItem, index) => {
+        const schemaScript = document.createElement('script');
+        schemaScript.type = 'application/ld+json';
+        schemaScript.setAttribute('data-schema-index', index.toString());
+        schemaScript.textContent = JSON.stringify(schemaItem);
+        document.head.appendChild(schemaScript);
+      });
+    } else {
+      // Single schema object
+      const schemaScript = document.createElement('script');
+      schemaScript.type = 'application/ld+json';
+      schemaScript.textContent = JSON.stringify(schema);
+      document.head.appendChild(schemaScript);
+    }
 
     // Cleanup function
     return () => {
