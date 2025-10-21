@@ -1,5 +1,6 @@
 import React from 'react';
 import { CheckCircle } from 'lucide-react';
+import { getSectionFromStep, getProgressMessage, TOTAL_SECTIONS } from '../../utils/sectionUtils';
 
 interface ProgressBarProps {
   currentStep: number;
@@ -13,63 +14,62 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
   completedSteps = []
 }) => {
   const percentage = Math.round((currentStep / totalSteps) * 100);
+  const currentSection = getSectionFromStep(currentStep);
+  const progressMessage = getProgressMessage(percentage);
 
   return (
     <div className="bg-white border-b border-gray-200 sticky top-0 z-40 shadow-sm">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center space-x-3">
-            <span className="text-sm font-medium text-gray-900">
-              Step {currentStep} of {totalSteps}
+            <span className="text-sm font-semibold text-teal-700">
+              Section {currentSection} of {TOTAL_SECTIONS}
             </span>
             <span className="text-xs text-gray-500 hidden sm:inline">
-              Medical Cannabis Eligibility Assessment
+              Medical Assessment
             </span>
           </div>
           <div className="flex items-center space-x-2">
-            <span className="text-sm font-semibold text-blue-600">
-              {percentage}%
-            </span>
-            <span className="text-xs text-gray-500 hidden sm:inline">Complete</span>
+            <span className="text-xs text-gray-400 hidden sm:inline">{percentage}% complete</span>
           </div>
         </div>
 
         <div className="relative">
-          <div className="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
+          <div className="w-full h-3 bg-gray-100 rounded-full overflow-hidden">
             <div
-              className="h-full bg-gradient-to-r from-blue-600 to-green-600 rounded-full transition-all duration-500 ease-out relative"
+              className="h-full bg-gradient-to-r from-teal-500 to-blue-600 rounded-full transition-all duration-500 ease-out relative"
               style={{ width: `${percentage}%` }}
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-30 animate-pulse" />
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-20 animate-pulse" />
             </div>
           </div>
 
-          <div className="flex justify-between mt-2">
-            {Array.from({ length: Math.min(5, totalSteps) }).map((_, index) => {
-              const stepNumber = Math.floor((index * totalSteps) / 4) + 1;
-              const isCompleted = currentStep > stepNumber;
-              const isCurrent = currentStep === stepNumber;
+          <div className="flex justify-between mt-3">
+            {Array.from({ length: TOTAL_SECTIONS }).map((_, index) => {
+              const sectionNumber = index + 1;
+              const isCompleted = currentSection > sectionNumber;
+              const isCurrent = currentSection === sectionNumber;
 
               return (
                 <div
                   key={index}
-                  className={`flex flex-col items-center ${index === 0 ? 'items-start' : index === 4 ? 'items-end' : 'items-center'}`}
+                  className={`flex flex-col items-center ${index === 0 ? 'items-start' : index === TOTAL_SECTIONS - 1 ? 'items-end' : 'items-center'}`}
                 >
                   <div
                     className={`
-                      w-8 h-8 rounded-full flex items-center justify-center text-xs font-medium transition-all duration-300
+                      w-9 h-9 rounded-full flex items-center justify-center text-xs font-semibold transition-all duration-300
                       ${isCompleted
-                        ? 'bg-green-600 text-white shadow-md'
+                        ? 'bg-teal-600 text-white shadow-lg'
                         : isCurrent
-                        ? 'bg-blue-600 text-white shadow-md ring-4 ring-blue-100'
-                        : 'bg-gray-200 text-gray-500'
+                        ? 'bg-blue-600 text-white shadow-lg ring-4 ring-blue-100'
+                        : 'bg-gray-200 text-gray-400'
                       }
                     `}
                   >
                     {isCompleted ? (
                       <CheckCircle className="w-5 h-5" />
                     ) : (
-                      stepNumber
+                      sectionNumber
                     )}
                   </div>
                 </div>
@@ -78,10 +78,10 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
           </div>
         </div>
 
-        {currentStep > 0 && currentStep < totalSteps && (
-          <div className="mt-3 text-center">
-            <p className="text-xs text-gray-600">
-              {totalSteps - currentStep} {totalSteps - currentStep === 1 ? 'question' : 'questions'} remaining
+        {percentage > 0 && percentage < 100 && (
+          <div className="mt-4 text-center">
+            <p className="text-sm font-medium text-teal-700">
+              {progressMessage}
             </p>
           </div>
         )}

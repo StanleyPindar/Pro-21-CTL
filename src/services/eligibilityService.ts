@@ -1,5 +1,6 @@
 import { supabase } from '../lib/supabase';
 import { AssessmentResponses, AssessmentResult, AssessmentAnalytics, ClinicMatchScore } from '../types/eligibility';
+import { getSectionFromStep } from '../utils/sectionUtils';
 
 export class EligibilityService {
   private static generateSessionId(): string {
@@ -156,6 +157,7 @@ export class EligibilityService {
     responses: AssessmentResponses
   ): Promise<void> {
     try {
+      const currentSection = getSectionFromStep(lastCompletedStep);
       await supabase
         .from('assessment_dropoffs')
         .insert({
@@ -166,6 +168,7 @@ export class EligibilityService {
           responses_json: responses,
           dropped_at: new Date().toISOString()
         });
+      console.log(`Assessment dropoff tracked: Section ${currentSection}, Step ${lastCompletedStep}`);
     } catch (error) {
       console.error('Error recording dropoff:', error);
     }

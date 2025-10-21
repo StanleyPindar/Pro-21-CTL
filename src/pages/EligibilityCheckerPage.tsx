@@ -10,6 +10,7 @@ import { AssessmentResponses } from '../types/eligibility';
 import { EligibilityService } from '../services/eligibilityService';
 import { calculateEligibility, matchClinics } from '../utils/eligibilityScoring';
 import { useClinicData } from '../context/ClinicDataProvider';
+import { getSectionFromStep } from '../utils/sectionUtils';
 
 const EligibilityCheckerPage: React.FC = () => {
   const navigate = useNavigate();
@@ -229,9 +230,11 @@ const EligibilityCheckerPage: React.FC = () => {
 
   const currentQuestion = getCurrentQuestion();
   const currentValue = responses[currentQuestion.id] || (currentQuestion.type === 'multiple' ? [] : '');
+  const currentSection = getSectionFromStep(currentStep);
+  const isLastQuestionInAssessment = currentStep >= eligibilityQuestions.length;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50">
+    <div className="min-h-screen bg-gradient-to-br from-teal-50 via-white to-blue-50">
       <div className="bg-white border-b border-gray-200 shadow-sm sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
@@ -316,7 +319,7 @@ const EligibilityCheckerPage: React.FC = () => {
               <button
                 onClick={handleNext}
                 disabled={!isStepValid() || isSubmitting}
-                className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-600 to-green-600 text-white text-lg font-medium rounded-xl hover:from-blue-700 hover:to-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-lg hover:shadow-xl"
+                className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-teal-600 to-blue-600 text-white text-lg font-semibold rounded-xl hover:from-teal-700 hover:to-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-lg hover:shadow-xl"
               >
                 {isSubmitting ? (
                   <div className="flex items-center space-x-3">
@@ -326,7 +329,7 @@ const EligibilityCheckerPage: React.FC = () => {
                 ) : (
                   <>
                     <span>
-                      {currentStep < eligibilityQuestions.length ? 'Next Question' : 'Get Results'}
+                      {isLastQuestionInAssessment ? 'Get Your Results' : 'Continue'}
                     </span>
                     <ChevronRight className="ml-2 h-5 w-5" />
                   </>
@@ -336,8 +339,8 @@ const EligibilityCheckerPage: React.FC = () => {
           </div>
         </div>
 
-        <div className="text-center text-sm text-gray-500">
-          <p>Your responses are saved automatically. You can return anytime within 24 hours.</p>
+        <div className="text-center">
+          <p className="text-sm text-gray-500">Your responses are saved automatically. You can return anytime within 24 hours.</p>
         </div>
       </div>
 
